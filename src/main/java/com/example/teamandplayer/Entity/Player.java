@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-
+//player Entity
 @Entity
 @Getter
 @Setter
@@ -17,6 +17,7 @@ public class Player {
     private int age;
     private String created_at;
     private String updated_at;
+    // player mapping to team
     @ManyToOne
     @JsonIgnore
     private Team team;

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
+// RestController for Players
 @RestController
 @RequestMapping("/player")
 public class PlayerController {
@@ -19,21 +19,25 @@ public class PlayerController {
     @Autowired
     public PlayerRepository playerRepository;
 
+    // Endpoint for player addition
     @PostMapping("/add/{id}")
     public String AddPlayer(@ModelAttribute("player")Player player,@PathVariable("id") Integer id){
-        player.setName("sks");
         Optional<Team> byId = this.teamRepository.findById(id);
         Team team = byId.get();
         player.setTeam(team);
         this.playerRepository.save(player);
         return this.playerRepository.save(player).toString();
     }
+
+    // Endpoint for Viewing of all players
     @GetMapping("/view")
     public String Viewplayer(){
         List<Player> all = this.playerRepository.findAll();
         return all.toString();
 
     }
+
+    // Emdpoint for deleting player
     @GetMapping("/delete/{id}")
     public  String DeletePlayer(@PathVariable("id") Integer id){
         Optional<Player> byId = this.playerRepository.findById(id);
@@ -42,6 +46,8 @@ public class PlayerController {
         return player.getName().toLowerCase();
 
     }
+
+    // Endpoint to update player Information
     @PutMapping("/update/{id}")
     public String Update(@PathVariable("id") Integer id){
         Optional<Player> byId = this.playerRepository.findById(id);
