@@ -21,15 +21,16 @@ public class TeamController {
     public PlayerRepository playerRepository;
 // Endpoint to add Team information
     @PostMapping("/add")
-    public String addteam(@ModelAttribute("team") Team team) {
+    public String addteam(@RequestBody Team team) {
 
         Team save = teamRepository.save(team);
         System.out.println(team);
+
         return save.toString();
     }
 //Endpoint to Delete the team
     @GetMapping("/delete/{id}")
-    public String DeleateTeam(@PathVariable("id") Integer id) {
+    public String DeleateTeam(@RequestBody Integer id) {
 
         Optional<Team> byId = teamRepository.findById(id);
         Team team = byId.get();
@@ -39,7 +40,7 @@ public class TeamController {
     }
 // Endpoint to View the team list
     @GetMapping("/view")
-    public String ViewTeam(@ModelAttribute("team") Team team) {
+    public String ViewTeam(@RequestBody Team team) {
 
         System.out.println(this.teamRepository.findAll());
         return teamRepository.findAll().toString();

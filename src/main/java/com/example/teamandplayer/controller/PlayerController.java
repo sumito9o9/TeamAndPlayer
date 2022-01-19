@@ -21,7 +21,7 @@ public class PlayerController {
 
     // Endpoint for player addition
     @PostMapping("/add/{id}")
-    public String AddPlayer(@ModelAttribute("player")Player player,@PathVariable("id") Integer id){
+    public String AddPlayer(@RequestBody Player player,@PathVariable("id") Integer id){
         Optional<Team> byId = this.teamRepository.findById(id);
         Team team = byId.get();
         player.setTeam(team);
